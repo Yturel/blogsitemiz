@@ -1,20 +1,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using WebApplication5.Data; // Projenin namespace'i
-using System.IO; // Path ve FileStream için eklendi
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.AspNetCore.Mvc.Formatters; // Task için eklendi
 
 public class HomeController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly IWebHostEnvironment _env;
 
-    // Sadece bu constructor kalsın
+    // Sadece bu constructor kalsÄ±n
     public HomeController(ApplicationDbContext context, IWebHostEnvironment env)
     {
         _context = context;
@@ -23,7 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        ViewBag.Message = "Hoşgeldiniz!";
+        ViewBag.Message = "HoÅŸgeldiniz!";
         return View();
     }
 
@@ -34,11 +28,11 @@ public class HomeController : Controller
             var posts = await _context.BlogPosts.ToListAsync();
             if (posts == null || posts.Count == 0)
             {
-                Console.WriteLine("Veritabanından veri gelmedi veya boş.");
+                Console.WriteLine("VeritabanÄ±ndan veri gelmedi veya boÅŸ.");
             }
             else
             {
-                Console.WriteLine("Veri başarıyla alındı.");
+                Console.WriteLine("Veri baÅŸarÄ±yla alÄ±ndÄ±.");
             }
 
             return View(posts);
@@ -51,21 +45,21 @@ public class HomeController : Controller
     }
 
 
-    // Belirli bir blog yazısını asenkron olarak id'ye göre buluyoruz
+    // Belirli bir blog yazÄ±sÄ±nÄ± asenkron olarak id'ye gÃ¶re buluyoruz
     public async Task<IActionResult> BlogDetail(int id)
     {
-        // Belirli bir blog yazısını id'ye göre asenkron olarak bul
+        // Belirli bir blog yazÄ±sÄ±nÄ± id'ye gÃ¶re asenkron olarak bul
         var post = await _context.BlogPosts.FirstOrDefaultAsync(x => x.Id == id);
         if (post == null)
         {
-            return NotFound(); // Eğer blog yazısı bulunamazsa 404 döndür
+            return NotFound(); // EÄŸer blog yazÄ±sÄ± bulunamazsa 404 dÃ¶ndÃ¼r
         }
         return View(post);
     }
 
     [Authorize]
-    // GET isteği için ValidateAntiForgeryToken niteliğini kaldırdık.
-    // Bu nitelik sadece POST metotları için gereklidir.
+    // GET isteÄŸi iÃ§in ValidateAntiForgeryToken niteliÄŸini kaldÄ±rdÄ±k.
+    // Bu nitelik sadece POST metotlarÄ± iÃ§in gereklidir.
     public IActionResult CreateBlog()
     {
         return View(new BlogPost());
@@ -74,7 +68,7 @@ public class HomeController : Controller
 
     [HttpPost]
     [Authorize]
-    [ValidateAntiForgeryToken] // CSRF saldırılarına karşı koruma
+    [ValidateAntiForgeryToken] // CSRF saldÄ±rÄ±larÄ±na karÅŸÄ± koruma
     public async Task<IActionResult> CreateBlog(BlogPost model, IFormFile imageFile)
     {
         
@@ -83,7 +77,7 @@ public class HomeController : Controller
         {
             if (!ModelState.IsValid)
             {
-                // Model doğrulaması başarısız olursa view'i tekrar göster
+                // Model doÄŸrulamasÄ± baÅŸarÄ±sÄ±z olursa view'i tekrar gÃ¶ster
                 return View(model);
             }
 
@@ -110,10 +104,10 @@ public class HomeController : Controller
 
             else
             {
-                // Resim yüklenmediyse varsayılan bir resim atayabilir veya hata verebilirsin
-                // Örneğin: model.ImageFile = "/images/default.png";
-                // Eğer ImageFile alanı veritabanında NULL kabul etmiyorsa ve resim yüklenmediyse burada hata alırsın.
-                // Bu durumda ya nullable yapmalısın (string?) ya da varsayılan bir değer atamalısın.
+                // Resim yÃ¼klenmediyse varsayÄ±lan bir resim atayabilir veya hata verebilirsin
+                // Ã–rneÄŸin: model.ImageFile = "/images/default.png";
+                // EÄŸer ImageFile alanÄ± veritabanÄ±nda NULL kabul etmiyorsa ve resim yÃ¼klenmediyse burada hata alÄ±rsÄ±n.
+                // Bu durumda ya nullable yapmalÄ±sÄ±n (string?) ya da varsayÄ±lan bir deÄŸer atamalÄ±sÄ±n.
             }
             string paylasanKullanici = User.Identity.Name;
             if (paylasanKullanici == "yturel573@gmail.com" || paylasanKullanici == "turely573@gmail.com")
@@ -125,16 +119,16 @@ public class HomeController : Controller
                 paylasanKullanici = "Agnieszka"; 
             }
             model.PaylasanKullanici = paylasanKullanici;
-            // Blog yazısını veritabanına ekle
+            // Blog yazÄ±sÄ±nÄ± veritabanÄ±na ekle
             _context.BlogPosts.Add(model);
             await _context.SaveChangesAsync(); // Asenkron kaydetme
 
-            // Başarılı olursa Blog sayfasına yönlendir
+            // BaÅŸarÄ±lÄ± olursa Blog sayfasÄ±na yÃ¶nlendir
             return RedirectToAction("Blog");
         }
         catch (Exception ex)
         {
-            ModelState.AddModelError("", "Bir hata oluştu: " + ex.ToString()); // TAM hata mesajı
+            ModelState.AddModelError("", "Bir hata oluÅŸtu: " + ex.ToString()); // TAM hata mesajÄ±
             return View(model);
         }
 
@@ -142,7 +136,7 @@ public class HomeController : Controller
 
     [HttpPost]
     [Authorize]
-    [ValidateAntiForgeryToken] // CSRF saldırılarına karşı koruma
+    [ValidateAntiForgeryToken] // CSRF saldÄ±rÄ±larÄ±na karÅŸÄ± koruma
     public async Task<IActionResult> Delete(int id)
     {
         
@@ -162,7 +156,7 @@ public class HomeController : Controller
         {
             if (post != null)
             {
-                // Eğer blog yazısının bir resmi varsa, o resmi de sil
+                // EÄŸer blog yazÄ±sÄ±nÄ±n bir resmi varsa, o resmi de sil
                 if (!string.IsNullOrEmpty(post.ImageFile))
                 {
                     var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", post.ImageFile.TrimStart('/'));
@@ -175,11 +169,11 @@ public class HomeController : Controller
                 _context.BlogPosts.Remove(post);
                 await _context.SaveChangesAsync(); // Asenkron kaydetme
             }
-            TempData["SilmeBasarili"] = "Blog başarıyla silindi !";
+            TempData["SilmeBasarili"] = "Blog baÅŸarÄ±yla silindi !";
         }
         else
         {
-            TempData["UyariMesaji"] = "Paylaşılan bloğu yalnızca paylaşan kullanıcı silebilir!!";
+            TempData["UyariMesaji"] = "PaylaÅŸÄ±lan bloÄŸu yalnÄ±zca paylaÅŸan kullanÄ±cÄ± silebilir!!";
         }
         return RedirectToAction("Blog");
     }
