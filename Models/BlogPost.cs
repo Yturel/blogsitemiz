@@ -1,15 +1,3 @@
-﻿
-using AspNetCoreGeneratedDocument;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using WebApplication5.Areas.Identity.Pages.Account;
-using System.Security.Principal;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc.Formatters;
-
 public class BlogPost
 {
     public int Id { get; set; }
