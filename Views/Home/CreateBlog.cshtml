@@ -1,0 +1,93 @@
+﻿@model BlogPost
+
+
+@{
+    ViewData["Title"] = "Blog Paylaş";
+}
+@{
+    var paylasanKullanici = User.Identity.Name;
+}
+<h2>Blog Paylaş</h2>
+
+<form asp-action="CreateBlog" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken() @* Bu satırı ekledik! *@
+
+    <div class="mb-3">
+        <label for="Title" class="form-label">Başlık</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="Content" class="form-label">İçerik</label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="imageFile" class="form-label">Resim Yükle</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+    
+    <div>
+        <p>Bloğun oluşturulduğu tarih ve zaman (Polonya Saati ile): <q style="color:orangered">@DateTime.Now.AddHours(2) (Polonya Saati ile)</q></p>
+    </div>
+
+        <label for="Kategori">Kategori seç</label>
+        <select asp-for="Kategori" name="Kategori" >
+        <option value="Bizim Hakkımızda">Bizim Hakkımızda</option>
+		<option value="Eleştiri">Eleştiri</option>
+        <option value="Finans">Finans</option>
+        <option value="Gündem">Gündem</option>
+        <option value="Biyografi">Biyografi</option>
+        <option value="Spor">Spor</option>
+        <option value="Deneme">Deneme</option>
+        <option value="Dijital Günlüğüm">Dijital Günlüğüm</option>
+        <option value="Gezi">Gezi</option>
+        <option value="Motivasyon">Motivasyon</option>
+        <option value="Sanat">Sanat</option>
+        <option value="Etkinlik">Etkinlik</option>
+        <option value="Araştırma">Araştırma</option>
+        <option value="Kişisel Gelişim">Kişisel Gelişim</option>
+        <option value="Diğer">Diğer</option>
+            </select>
+
+            <br/>
+    <br />
+    <label for="FontFamily">Yazı stili seçin</label>
+    <label for="FontFamily">Yazı stili seçin</label>
+    <select asp-for="FontFamily" name="FontFamily">
+        <option value="Arial" style="font-family:'Arial'">Arial</option>
+        <option value="Bookman" style="font-family:'Bookman'">Bookman</option>
+        <option value="Brush Script MT" style="font-family:'Brush Script MT'">Brush Script MT</option>
+        <option value="Calibri" style="font-family:'Calibri'">Calibri</option>
+        <option value="Cambria" style="font-family:'Cambria'">Cambria</option>
+        <option value="Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</option>
+        <option value="Consolas" style="font-family:'Consolas'">Consolas</option>
+        <option value="Courier New" style="font-family:'Courier New'">Courier New</option>
+        <option value="Cursive" style="font-family:'Cursive'">Cursive</option>
+        <option value="fantasy" style="font-family:'fantasy'">fantasy</option>
+        <option value="Franklin Gothic Medium" style="font-family:'Franklin Gothic Medium'">Franklin Gothic Medium</option>
+        <option value="Garamond" style="font-family:'Garamond'">Garamond</option>
+        <option value="Georgia" style="font-family:'Georgia'">Georgia</option>
+        <option value="Helvetica" style="font-family:'Helvetica'">Helvetica</option>
+        <option value="Impact" style="font-family:'Impact'">Impact</option>
+        <option value="Lucida Console" style="font-family:'Lucida Console'">Lucida Console</option>
+        <option value="Monaco" style="font-family:'Monaco'">Monaco</option>
+        <option value="MS UI Gothic" style="font-family:'MS UI Gothic'">MS UI Gothic</option>
+        <option value="Palatino Linotype" style="font-family:'Palatino Linotype'">Palatino Linotype</option>
+        <option value="Segoe UI" style="font-family:'Segoe UI'">Segoe UI</option>
+        <option value="SimSun-ExtG" style="font-family:'SimSun-ExtG'">SimSun-ExtG</option>
+        <option value="Tahoma" style="font-family:'Tahoma'">Tahoma</option>
+        <option value="Times New Roman" style="font-family:'Times New Roman'">Times New Roman</option>
+        <option value="Trebuchet MS" style="font-family:'Trebuchet MS'">Trebuchet MS</option>
+        <option value="Verdana" style="font-family:'Verdana'">Verdana</option>
+        
+    </select>
+
+    <br/>
+    <button type="submit" class="btn btn-primary">Paylaş</button>
+    
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,123 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+ /* Tema geçiþi için body'ye class eklenecek */
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+}
+
+/* A etiketleri (linkler) görünür olsun */
+body.dark-mode a {
+    color: #aad4ff;
+}
+
+/* Formlar, butonlar, kutular vb. için örnek */
+body.dark-mode .card,
+body.dark-mode .form-control,
+body.dark-mode .btn {
+    background-color: #2c2c2c;
+    color: #f1f1f1;
+    border-color: #444;
+}
+
+/* Ýsteðe baðlý: input placeholder rengi */
+body.dark-mode input::placeholder {
+    color: #bbb;
+}
+
+
+
+.navbar-dark {
+    background-color: #222 !important;
+    color: white;
+    
+}
+
+
+/*.sidebar-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background-image: url('../resim/romntikresimarkaplan.jpeg');*/ /* Yüklediðin görselin yolu */
+    /*background-repeat: repeat-y;
+    background-size: contain;*/ /* veya cover, görsele göre deðiþtir */
+    /*z-index: 0;*/ /* Diðer içeriklerin altýnda kalmasý için */
+/*}*/
+
+/* Sayfa içeriðinin sidebar'dan kaymasý için boþluk býrak */
+/*body {
+    padding-left: 100px;
+}*/
+
+.sidebar-image {
+    width: 200px;
+    min-height: 100vh; /* Sayfanýn tamamýný kapsasýn */
+    background-image: url('/resim/romntikresimarkaplan.jpeg');
+    background-repeat: repeat-y;
+    background-size: 100% auto; /* Görsel geniþliði %100 olsun, yüksekliði otomatik */
+    background-position: top center;
+    background-color: transparent;
+    
+}
+
+.custom-button {
+    display: inline-block;
+    margin-left: 150px;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .custom-button:hover {
+        background-color: #2980b9;
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.image {
+ 
+}
+.image:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+}

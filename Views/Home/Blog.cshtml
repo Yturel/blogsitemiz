@@ -1,0 +1,107 @@
+﻿@model List<BlogPost>
+
+@if (TempData["UyariMesaji"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        @TempData["UyariMesaji"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            var alert = document.querySelector('.alert');
+            if (alert) {
+                var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            }
+        }, 5000);
+    </script>
+}
+
+
+@if (TempData["SilmeBasarili"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        @TempData["SilmeBasarili"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            var alert = document.querySelector('.alert');
+            if (alert) {
+                var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            }
+        }, 5000);
+    </script>
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">Model boş geldi.</div>
+
+}
+else if (!Model.Any())
+{
+    <div class="alert alert-warning">Hiç blog yazısı bulunamadı.</div>
+}
+else
+{
+    <div class="alert alert-success">Blog yazıları başarıyla yüklendi.</div>
+}
+
+
+@{
+    ViewData["Title"] = "Blog Sayfamız";
+}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Blog Sayfamız</h2> 
+  
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="CreateBlog" asp-controller="Home" class="btn btn-success">Yeni Blog Ekle</a>
+    }
+</div>
+
+<div class="row">
+    @foreach (var post in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                @* Kartların eşit yüksekliğe sahip olması için h-100 ekledim yinede bazen eşit olmuyor :D *@
+                @if (!string.IsNullOrEmpty(post.ImageFile))
+                {
+                    <img src="@post.ImageFile" class="card-img-top" alt="@post.Title" style="height: 200px; object-fit: cover;" /> @* Resimlerin boyutunu ayarladım *@
+                }
+                else
+                {
+                    <img src="/images/default-placeholder.png" class="card-img-top" alt="Varsayılan Resim" style="height: 200px; object-fit: cover;" /> @* Varsayılan resim için bir yer tutucu *@
+                }
+                <div class="card-body d-flex flex-column">
+                    @* Butonların altta hizalanması için flexbox ekledim *@
+                    <h5 class="card-title">@post.Title</h5>
+                    <p class="card-text">@((post.Content.Length > 100) ? post.Content.Substring(0, 100) + "..." : post.Content)</p> @* İçeriği kısalttım *@
+                    <div class="mt-auto">
+                        @* Butonları en alta itmek için *@
+                        <a href="/Home/BlogDetail/@post.Id" class="btn btn-primary btn-sm">Detay</a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-action="Delete" asp-controller="Home" method="post" class="d-inline" onsubmit="return confirm('Bu blogu silmek istediğinizden emin misiniz?');">
+                                <input type="hidden" name="id" value="@post.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/js/filtreleme.js"></script>

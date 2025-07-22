@@ -1,0 +1,43 @@
+﻿@model BlogPost
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+    @if (Model.olusturulanZaman is null )
+    {
+    <p>Oluşturulma zamanı bulunamadı 🥲 Galiba bu bir The Flintstones devrinden kalan bir blog yazısı. Keyifli okumalar 😊</p>
+    }
+else
+{
+
+    <h style="color: red">@Model.olusturulanZaman</h> <h>Tarih/Saatinde paylaşıldı. Keyifli okumalar 😊 </h>
+<p></p>
+
+}
+    @if(Model.PaylasanKullanici is null)
+    {
+        <p>Paylaşan kullanıcı bilinmiyor. Muhtemelen Yunus.</p>
+    }
+    else
+    {
+        <p>Paylaşan kullanıcı : @Model.PaylasanKullanici</p>
+        <p>
+            Kategori : @Model.Kategori
+        </p>
+    }
+
+
+    @if (!string.IsNullOrEmpty(Model.ImageFile))
+{
+    <img src="@Model.ImageFile" alt="@Model.Title" class="img-fluid" />
+}
+else
+{
+    <p><em>Resim bulunamadı.</em></p>
+}
+
+<p style="font-size: 24px; font-family: @Model.FontFamily;  ">@Model.Content</p>
+<a href="/Home/Blog" class="btn btn-secondary">Geri</a>
+

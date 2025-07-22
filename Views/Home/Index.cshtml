@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+@{
+    var olusturulanZaman = DateTime.Now.AddHours(2);
+    var _olusturulanZaman = olusturulanZaman.ToString("F");
+    @if (DateTime.Now.Day < 18 || DateTime.Now.Month == 7)
+    {
+        <audio controls style="color:aquamarine">
+            <source src="~/resim/What Could I Say - Trespassers William.mp3" type="audio/mp3">
+            Tarayıcınız otomatik müzik başlatma özelliğini desteklemiyor.
+        </audio>
+    }
+}
+
+@if (olusturulanZaman.Day == 10 && olusturulanZaman.Month == 7 || olusturulanZaman.Day == 14 && olusturulanZaman.Month == 1)
+{
+    <p>Lütfen resmin üzerine tıkla 😘</p>
+    <p>@_olusturulanZaman</p>
+    
+    <a href="Home/DogumGunu">
+    <img style="height: 40%"src="~/images/e82a8d36-aa17-4f4d-b7ea-93af2b420222.jpeg" />
+    </a>
+}
+<p>@_olusturulanZaman</p>
+<h2>@ViewBag.Message</h2>
+<p style="font-family:'Comic Sans MS'">Menüden blog sayfamıza geçiş yapabilirsiniz.</p>
+<div style="background-image: url('/resim/ourpersonalblog3.jpg'); 
+            width: 1000px;
+            margin-left: 100px;
+            height: 400px;
+            opacity: 50%;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;">
+</div>
+
+<p style="margin-left:150px; background-color: lightslategray; padding: 10px; font-size:x-large; width: max-content; border-radius: 6px;">
+    Merhaba, blog sitemize hoşgeldiniz..
+</p>
+<a href="/Home/Blog" class="custom-button">Blog sayfamız</a>
+
+
+<a href="/Home/Blog">
+    <p></p>
+    <div class="image" style="background-image: url('/resim/ayicon.jpeg'); width: 1000px;
+    margin-left: 100px;
+    height: 400px;
+    opacity: 75%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;">
+            
+
+</div>
+</a>
