@@ -5,13 +5,7 @@
 @{
     var olusturulanZaman = DateTime.Now.AddHours(2);
     var _olusturulanZaman = olusturulanZaman.ToString("F");
-    @if (DateTime.Now.Day < 18 || DateTime.Now.Month == 7)
-    {
-        <audio controls style="color:aquamarine">
-            <source src="~/resim/What Could I Say - Trespassers William.mp3" type="audio/mp3">
-            Tarayıcınız otomatik müzik başlatma özelliğini desteklemiyor.
-        </audio>
-    }
+
 }
 
 @if (olusturulanZaman.Day == 10 && olusturulanZaman.Month == 7 || olusturulanZaman.Day == 14 && olusturulanZaman.Month == 1)
