@@ -4,7 +4,7 @@ public class BlogPost
     public string Title { get; set; }
     public string Content { get; set; }
     public string? ImageFile { get; set; } // Resim yolunu tutacak özellik
-    public DateTime? olusturulanZaman { get; set; } = DateTime.Now.AddHours(2);
+    public DateTime? olusturulanZaman { get; set; } = DateTime.UtcNow.AddHours(2);
     public string? PaylasanKullanici { get; set; }
 
     public string Kategori { get; set; }
